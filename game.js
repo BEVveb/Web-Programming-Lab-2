@@ -7,6 +7,7 @@ function Bear() {
   
   
   this.move = function(xDir, yDir) {
+    this.fitBounds(); //we add this instruction to keep bear within board
     this.x += this.dBear * xDir;
     this.y += this.dBear * yDir;
     this.display();
@@ -17,6 +18,21 @@ function Bear() {
     this.htmlElement.style.left = this.x + "px";
     this.htmlElement.style.top = this.y + "px";
     this.htmlElement.style.display = "absolute";
+  };
+
+
+  this.fitBounds = function() {
+    let parent = this.htmlElement.parentElement;
+    let iw = this.htmlElement.offsetWidth;
+    let ih = this.htmlElement.offsetHeight;
+    let l = parent.offsetLeft;
+    let t = parent.offsetTop;
+    let w = parent.offsetWidth;
+    let h = parent.offsetHeight;
+    if (this.x < 0) this.x = 0;
+    if (this.x > w - iw) this.x = w - iw;
+    if (this.y < 0) this.y = 0;
+    if (this.y > h - ih) this.y = h - ih;
   };
 } 
 
@@ -45,14 +61,6 @@ function moveBear(e) {
     bear.move(0, 1)
   } // down key
 }
-
-this.move = function(xDir, yDir) {
-  this.fitBounds(); //we add this instruction to keep bear within board
-  this.x += this.dBear * xDir;
-  this.y += this.dBear * yDir;
-  this.display();
-};
-
 
 class Bee {
   constructor(beeNumber) {
@@ -98,6 +106,10 @@ class Bee {
         this.y = h - ih;
     };
   }
+}
+
+function getRandomInt(max){
+  return Math.floor(Math.random() * max);
 }
 
 function createBeeImg(wNum) {
@@ -208,20 +220,6 @@ function overlap(element1, element2) {
   return true;
 }
 
-this.fitBounds = function() {
-  let parent = this.htmlElement.parentElement;
-  let iw = this.htmlElement.offsetWidth;
-  let ih = this.htmlElement.offsetHeight;
-  let l = parent.offsetLeft;
-  let t = parent.offsetTop;
-  let w = parent.offsetWidth;
-  let h = parent.offsetHeight;
-  if (this.x < 0) this.x = 0;
-  if (this.x > w - iw) this.x = w - iw;
-  if (this.y < 0) this.y = 0;
-  if (this.y > h - ih) this.y = h - ih;
-};
-
 function start() {
   //create bear
   bear = new Bear();
@@ -231,4 +229,6 @@ function start() {
   bees = new Array();
   //create bees
   makeBees();
+  //take start time
+  lastStingTime = new Date();
 }
