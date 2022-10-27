@@ -20,9 +20,12 @@
     <body onload="start();">
         <div id="title">
             <h1>Help the bear escape the bees !</h1>
-            <p>Bear tries to avoid being stung by <input type="text" id="nbBees" value="1" size="3"> bees by running and jumping. The objective is to have as less stings as possible!</p>
-            <p>You can ajust bees' speed <input type="text" id="speedBees" value="50" size="3"> px/ms
-                <br> and the refresh period <input type="text" id="periodTimer" value="10" size="3"> ms </p>
+            <ul>
+            <li>Bear tries to avoid being stung by <input type="text" id="nbBees" value="1" size="3"> bees by running and jumping. The objective is to have as less stings as possible!</li>
+            <li>You can ajust bees' speed <input type="text" id="speedBees" value="50" size="3"> px/ms
+            <li> and the refresh period <input type="text" id="periodTimer" value="10" size="3"> ms </li>
+            <li> the bear speed <input type="text" id="bearSpeed" value="10" size="4" onchange="setBearSpeed();"></li>
+            </ul>
             <h2>Press left, right, up, down keys to move the bear</h2>
 
         </div>

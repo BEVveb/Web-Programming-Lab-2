@@ -5,7 +5,6 @@ function Bear() {
   this.x = this.htmlElement.offsetLeft;
   this.y = this.htmlElement.offsetTop;
   
-  
   this.move = function(xDir, yDir) {
     this.fitBounds(); //we add this instruction to keep bear within board
     this.x += this.dBear * xDir;
@@ -61,6 +60,7 @@ function moveBear(e) {
     bear.move(0, 1)
   } // down key
 }
+
 
 class Bee {
   constructor(beeNumber) {
@@ -141,7 +141,7 @@ function createBeeImg(wNum) {
 function makeBees() {
   //get number of bees specified by the user
   let nbBees = document.getElementById("nbBees").value;
-  nbBees = Number(nbBees); //try converting the content of the input to a number 
+  nbBees = Number(5); //try converting the content of the input to a number 
   if (isNaN(nbBees)) { //check that the input field contains a valid number
     window.alert("Invalid number of bees");
     return;
@@ -154,6 +154,14 @@ function makeBees() {
     bee.display(); //display the bee
     bees.push(bee); //add the bee object to the bees array
     i++;
+  }
+}
+
+function setBearSpeed(){
+  bearSpeed = document.getElementById("bearSpeed").value
+  if (isNaN(bearSpeed)){
+    window.alert("Invalid bear speed")
+    return
   }
 }
 
@@ -222,13 +230,15 @@ function overlap(element1, element2) {
 
 function start() {
   //create bear
-  bear = new Bear();
+  bear = new Bear()
   // Add an event listener to the keypress event
-  document.addEventListener("keydown", moveBear, false);
+  document.addEventListener("keydown", moveBear, false)
   //create new array for bees
-  bees = new Array();
+  bees = new Array()
   //create bees
   makeBees();
   //take start time
-  lastStingTime = new Date();
+  lastStingTime = new Date()
+  // Initialize the bees methodology
+  updateBees()
 }
